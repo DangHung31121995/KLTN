@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 using AutoMapper;
+using ShopOnlineApp.Application.ViewModels.Bill;
+using ShopOnlineApp.Application.ViewModels.Business;
+using ShopOnlineApp.Application.ViewModels.BusinessAction;
 using ShopOnlineApp.Application.ViewModels.Function;
 using ShopOnlineApp.Application.ViewModels.Product;
 using ShopOnlineApp.Application.ViewModels.Role;
+using ShopOnlineApp.Application.ViewModels.Size;
 using ShopOnlineApp.Application.ViewModels.User;
 using ShopOnlineApp.Data.Entities;
 
@@ -44,6 +48,44 @@ namespace ShopOnlineApp.Application.AutoMapper
                 cfg.CreateMap<AppRole, AppRoleViewModel>();
                 cfg.CreateMap<AppRoleViewModel, AppRole>();
                 #endregion approle
+
+                #region Permission
+                cfg.CreateMap<Permission, PermissionViewModel>();
+                cfg.CreateMap<PermissionViewModel, Permission>();
+                #endregion
+
+                #region Bussiness
+                cfg.CreateMap<Business, BusinessViewModel>();
+                cfg.CreateMap<BusinessViewModel, Business>();
+                #endregion
+
+                #region BussinessAction
+                cfg.CreateMap<BusinessAction, BusinessActionViewModel>();
+                cfg.CreateMap<BusinessActionViewModel, BusinessAction>();
+                #endregion
+
+                #region BusinessAction
+
+
+
+                #endregion
+
+                #region Bill
+                cfg.CreateMap<Bill, BillViewModel>().MaxDepth(2);
+                cfg.CreateMap<BillViewModel, Bill>().MaxDepth(2);
+                #endregion
+
+                #region Size
+                cfg.CreateMap<Size, SizeViewModel>();
+                cfg.CreateMap<SizeViewModel, Size>();
+                #endregion
+
+                #region Size
+                cfg.CreateMap<Size, SizeViewModel>();
+                cfg.CreateMap<SizeViewModel, Size>();
+                #endregion
+
+
             }
             catch (Exception e)
             {

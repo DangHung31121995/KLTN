@@ -67,6 +67,8 @@
                                 <th>Status</th>
                                 <th></th>
                                 <th></th>
+                                
+                                </th>
                             </tr>
                         </thead>
                         <tbody id="tbl-content"></tbody>
@@ -97,8 +99,6 @@
             </div>
         </div>
     </div>
-
-
     <script id="table-template" type="x-tmpl-mustache">
         <tr>
             <td>{{UserName}}</td>
@@ -106,6 +106,9 @@
             <td>{{{Avatar}}}</td>
             <td>{{{DateCreated}}}</td>
             <td>{{{Status}}}</td>
+            <td>
+                <a href="/Admin/Business/Index" class="btn-grant btn-xs btn-primary btn-grant"> <i class="fa fa-eye-slash"></i> </a>
+            </td>
             <td>
                 <a href="#" data-id="{{Id}}" class="btn-edit"><i class="fa fa-pencil-square-o"></i></a>
                 @*@if ((await AuthorizationService.AuthorizeAsync(User, "USER", Operations.Update)).Succeeded)

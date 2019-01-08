@@ -16,5 +16,6 @@ namespace ShopOnlineApp.Application.Interfaces
         void Update(ProductViewModel product);
         void Save();
         void Delete(int id);
+        void ImportExcel(string filePath, int categoryId);
     }
 }

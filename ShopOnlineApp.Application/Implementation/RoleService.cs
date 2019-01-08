@@ -11,6 +11,7 @@ using ShopOnlineApp.Application.Interfaces;
 using ShopOnlineApp.Application.ViewModels.Role;
 using ShopOnlineApp.Data.EF.Common;
 using ShopOnlineApp.Data.Entities;
+using ShopOnlineApp.Data.Enums;
 using ShopOnlineApp.Data.IRepositories;
 using ShopOnlineApp.Infrastructure.Interfaces;
 using ShopOnlineApp.Utilities.Enum;
@@ -109,28 +110,30 @@ namespace ShopOnlineApp.Application.Implementation
 
         public List<PermissionViewModel> GetListFunctionWithRole(Guid roleId)
         {
-            var functions = _functionRepository.FindAll();
+            var functions =_functionRepository.FindAll(x => x.Status == Status.Active); 
+
             var permissions = _permissionRepository.FindAll();
 
             var query = from f in functions
                         join p in permissions on f.Id equals p.FunctionId into fp
-                        from p in fp.DefaultIfEmpty()
-                        where p != null && p.RoleId == roleId
+                        from q in fp.DefaultIfEmpty()
+                        where q != null && q.RoleId == roleId
                         select new PermissionViewModel()
                         {
                             RoleId = roleId,
                             FunctionId = f.Id,
-                            CanCreate = p != null && p.CanCreate,
-                            CanDelete = p != null && p.CanDelete,
-                            CanRead = p != null && p.CanRead,
-                            CanUpdate = p != null && p.CanUpdate
+                            CanCreate = q != null && q.CanCreate,
+                            CanDelete = q != null && q.CanDelete,
+                            CanRead = q != null && q.CanRead,
+                            CanUpdate = q != null && q.CanUpdate
                         };
             return query.ToList();
         }
 
         public void SavePermission(List<PermissionViewModel> permissionVms, Guid roleId)
         {
-            var permissions = Mapper.Map<List<PermissionViewModel>, List<Permission>>(permissionVms);
+            var permissions = new PermissionViewModel().Map(permissionVms);
+
             var oldPermission = _permissionRepository.FindAll().Where(x => x.RoleId == roleId).ToList();
 
             if (oldPermission.Any())

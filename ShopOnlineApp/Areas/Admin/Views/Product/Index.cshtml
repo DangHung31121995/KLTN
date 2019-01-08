@@ -10,7 +10,7 @@
     <link href="~/client-side/custome.css" rel="stylesheet" />
 }
 @section Scripts
-{
+    {
     <script src="~/lib/jQuery-EasyUI/jquery.easyui.min.js"></script>
     <script src="~/app/controller/product/index.js" asp-append-version="true"></script>
 
@@ -104,7 +104,7 @@
         </div>
     </div>
 </div>
-@Html.Partial("_AddEditModal.cshtml")
+
 
 <div class="clearfix"></div>
 
@@ -125,3 +125,5 @@
         </th>
     </tr>
 </script>
+@Html.Partial("_AddEditModal.cshtml")
+@Html.Partial("_ImportExcelModal.cshtml")

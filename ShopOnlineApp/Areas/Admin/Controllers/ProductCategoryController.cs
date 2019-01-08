@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using ShopOnlineApp.Application.Interfaces;
 using ShopOnlineApp.Application.ViewModels.Product;
+using ShopOnlineApp.Infrastructure.Interfaces;
 using ShopOnlineApp.Utilities.Helpers;
 
 namespace ShopOnlineApp.Areas.Admin.Controllers
@@ -14,13 +15,16 @@ namespace ShopOnlineApp.Areas.Admin.Controllers
         #region private property
 
         private readonly IProductCategoryService _productCategoryService;
+        private readonly IUnitOfWork _unitOfWork;
+
 
         #endregion
 
         #region constructor
-        public ProductCategoryController(IProductCategoryService productCategoryService)
+        public ProductCategoryController(IProductCategoryService productCategoryService, IUnitOfWork unitOfWork)
         {
             _productCategoryService = productCategoryService;
+            _unitOfWork = unitOfWork;
         }
 
         #endregion
@@ -54,7 +58,7 @@ namespace ShopOnlineApp.Areas.Admin.Controllers
             }
 
             _productCategoryService.Delete(id);
-            _productCategoryService.Save();
+            _unitOfWork.Commit();
             return new OkObjectResult(id);
         }
 
@@ -77,7 +81,7 @@ namespace ShopOnlineApp.Areas.Admin.Controllers
             {
                 _productCategoryService.Update(productVm);
             }
-            _productCategoryService.Save();
+            _unitOfWork.Commit();
             return new OkObjectResult(productVm);
         }
         public IActionResult UpdateParentId(int sourceId, int targetId, Dictionary<int, int> items)
@@ -94,7 +98,7 @@ namespace ShopOnlineApp.Areas.Admin.Controllers
             }
 
             _productCategoryService.UpdateParentId(sourceId, targetId,items);
-            _productCategoryService.Save();
+            _unitOfWork.Commit();
             return new OkResult();
         }
 
@@ -111,9 +115,8 @@ namespace ShopOnlineApp.Areas.Admin.Controllers
             }
 
             _productCategoryService.ReOrder(sourceId,targetId);
-            _productCategoryService.Save();
+            _unitOfWork.Commit();
             return new OkResult();
-
         }
 
         [HttpGet]

@@ -1,6 +1,5 @@
 ﻿var RoleController = function () {
     var self = this;
-
     this.initialize = function () {
         loadData();
         registerEvents();
@@ -18,7 +17,7 @@
         });
 
         $('#txt-search-keyword').keypress(function (e) {
-            if (e.which == 13) {
+            if (e.which === 13) {
                 e.preventDefault();
                 loadData();
             }
@@ -49,7 +48,6 @@
 
         $('body').on('click', '.btn-edit', function (e) {
             e.preventDefault();
-          
             var that = $(this).data('id');
             $.ajax({
                 type: "GET",
@@ -66,7 +64,6 @@
                     $('#txtDescription').val(data.description);
                     $('#modal-add-edit').modal('show');
                     shoponline.stopLoading();
-
                 },
                 error: function (status) {
                     shoponline.notify('Có lỗi xảy ra', 'error');
@@ -88,7 +85,7 @@
                     data: {
                         Id: id,
                         Name: name,
-                        Description: description,
+                        Description: description
                     },
                     dataType: "json",
                     beforeSend: function () {
@@ -184,14 +181,14 @@
                 var render = "";
                 $.each(response, function (i, item) {
                     render += Mustache.render(template, {
-                        Name: item.Name,
-                        treegridparent: item.ParentId != null ? "treegrid-parent-" + item.ParentId : "",
-                        Id: item.Id,
-                        AllowCreate: item.AllowCreate ? "checked" : "",
-                        AllowEdit: item.AllowEdit ? "checked" : "",
-                        AllowView: item.AllowView ? "checked" : "",
-                        AllowDelete: item.AllowDelete ? "checked" : "",
-                        Status: shoponline.getStatus(item.Status),
+                        Name: item.name,
+                        treegridparent: item.parentId !== null ? "treegrid-parent-" + item.parentId : "",
+                        Id: item.id,
+                        AllowCreate: item.allowCreate ? "checked" : "",
+                        AllowEdit: item.allowEdit ? "checked" : "",
+                        AllowView: item.allowView ? "checked" : "",
+                        AllowDelete: item.allowDelete ? "checked" : "",
+                        Status: shoponline.getStatus(item.status)
                     });
                 });
                 if (render != undefined) {
@@ -247,7 +244,7 @@
                 shoponline.stopLoading();
             },
             error: function (status) {
-                console.log(status);
+                //console.log(status);
             }
         });
     }
@@ -268,7 +265,7 @@
                 var litsPermission = response;
                 $.each($('#tblFunction tbody tr'), function (i, item) {
                     $.each(litsPermission, function (j, jitem) {
-                        if (jitem.FunctionId == $(item).data('id')) {
+                        if (jitem.FunctionId === $(item).data('id')) {
                             $(item).find('.ckView').first().prop('checked', jitem.CanRead);
                             $(item).find('.ckAdd').first().prop('checked', jitem.CanCreate);
                             $(item).find('.ckEdit').first().prop('checked', jitem.CanUpdate);
@@ -329,7 +326,6 @@
                 var template = $('#table-template').html();
                 var render = "";
                 if (response.data.rowCount > 0) {
-
                     $.each(response.data.items, function (i, item) {
                         render += Mustache.render(template, {
                             Name: item.name,

@@ -1,29 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using TeduCoreApp.Data;
-using TeduCoreApp.Data.EF;
-using AutoMapper;
+using Microsoft.Extensions.Logging;
 using ShopOnlineApp.Application.Implementation;
 using ShopOnlineApp.Application.Interfaces;
 using ShopOnlineApp.Data.EF;
+using ShopOnlineApp.Data.EF.Repositories;
 using ShopOnlineApp.Data.Entities;
 using ShopOnlineApp.Data.IRepositories;
-using ShopOnlineApp.Services;
-using Microsoft.Extensions.Logging;
-using ShopOnlineApp.Data.EF.Repositories;
 using ShopOnlineApp.Helper;
 using ShopOnlineApp.Infrastructure.Interfaces;
 using ShopOnlineApp.Models;
+using ShopOnlineApp.Services;
 
-namespace TeduCoreApp
+namespace ShopOnlineApp
 {
     public class Startup
     {
@@ -69,8 +64,6 @@ namespace TeduCoreApp
             services.AddScoped<UserManager<AppUser>, UserManager<AppUser>>();
             services.AddScoped<RoleManager<AppRole>, RoleManager<AppRole>>();
 
-
-
             services.AddSingleton(Mapper.Configuration);
             services.AddScoped<IMapper>(sp => new Mapper(sp.GetRequiredService<AutoMapper.IConfigurationProvider>(), sp.GetService));
 
@@ -90,6 +83,9 @@ namespace TeduCoreApp
             
             services.AddTransient<IProductTagRepository, ProductTagRepository>();
             services.AddTransient<IPermissionRepository,PermissionRepository>();
+            services.AddTransient<IBusinessRepository, BusinessRepository>();
+            services.AddTransient<IBusinessActionRepository, BusinessActionRepository>();
+            services.AddTransient<IBillRepository, BillRepository>();
 
             //service
             services.AddTransient<IFunctionService, FunctionService>();
@@ -98,9 +94,11 @@ namespace TeduCoreApp
             services.AddTransient<IProductCategoryService, ProductCategoryService>();
             services.AddScoped<IUserClaimsPrincipalFactory<AppUser>, ShopOnlineClaimsPrincipalFactory>();
             services.AddTransient<IRoleService, RoleService>();
+            services.AddTransient<IBusinessService, BusinessService>();
+            services.AddTransient<IBusinessActionService, BusinessActionService>();
+            services.AddTransient<IBillService, BillService>();
 
-
-
+            //Config system
             services.AddMvc();
         }
 

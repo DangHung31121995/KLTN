@@ -5,7 +5,6 @@ using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using ShopOnlineApp.Infrastructure.Interfaces;
 using ShopOnlineApp.Infrastructure.SharedKernel;
-using TeduCoreApp.Data.EF;
 
 namespace ShopOnlineApp.Data.EF
 {

@@ -68,9 +68,7 @@
                     $('#txtEmail').val(data.email);
                     $('#txtPhoneNumber').val(data.phoneNumber);
                     $('#ckStatus').prop('checked', data.status === 1);
-
                     initRoleList(data.Roles);
-
                     disableFieldEdit(true);
                     $('#modal-add-edit').modal('show');
                     shoponline.stopLoading();
@@ -157,6 +155,25 @@
                 });
             });
         });
+
+        //$('body').on('click',
+        //    'btn-grant',
+        //    function(e) {
+        //        e.preventDefault();
+        //        $.ajax({
+        //            type: "Get",
+        //            url:"/Admin/Business/Index",
+        //            dataType: "json",
+        //            beforeSend: function () {
+        //                shoponline.startLoading();
+        //            },
+        //            success: function(response) {
+                        
+        //            }
+
+        //        });
+
+        //    });
     };
 
     function disableFieldEdit(disabled) {

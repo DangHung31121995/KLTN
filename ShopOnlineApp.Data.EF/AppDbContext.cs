@@ -55,7 +55,10 @@ namespace ShopOnlineApp.Data.EF
         public DbSet<AdvertistmentPage> AdvertistmentPages { get; set; }
         public DbSet<Advertistment> Advertistments { get; set; }
         public DbSet<AdvertistmentPosition> AdvertistmentPositions { get; set; }
+        public DbSet<Business> Businesss { get; set; }
 
+        public DbSet<BusinessAction> BusinessActions { get; set; }
+        public DbSet<GrantPermission> GrantPermissions { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             #region Identity Config

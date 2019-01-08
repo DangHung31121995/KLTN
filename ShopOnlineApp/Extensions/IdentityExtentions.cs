@@ -8,7 +8,7 @@ namespace ShopOnlineApp.Extensions
 {
     public static class IdentityExtentions
     {
-        public static string GetSpecificDefault(this ClaimsPrincipal claimPrincipal,string typeClaim)
+        public static string GetSpecificDefault(this ClaimsPrincipal claimPrincipal, string typeClaim)
         {
             var claim = claimPrincipal.Claims.FirstOrDefault(x => x.Type == typeClaim);
             return (claim != null) ? claim.Value : string.Empty;

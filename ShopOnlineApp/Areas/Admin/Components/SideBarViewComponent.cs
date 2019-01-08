@@ -26,7 +26,7 @@ namespace ShopOnlineApp.Areas.Admin.Components
 
             if (roles.Split(";").Contains(ConstantSystem.AdminRole))
             {
-                functions = await _functionService.GetAll();
+                functions = await _functionService.GetAll(string.Empty);
             }
             else
             {

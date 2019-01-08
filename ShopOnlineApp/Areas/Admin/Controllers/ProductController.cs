@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CloudinaryDotNet;
-using CloudinaryDotNet.Actions;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using OfficeOpenXml;
+using OfficeOpenXml.Table;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using ShopOnlineApp.Application.Interfaces;
@@ -23,13 +28,15 @@ namespace ShopOnlineApp.Areas.Admin.Controllers
         private readonly IConfiguration _configuration;
         private readonly IOptions<CloudinaryImage> _cloudinaryConfig;
         private Cloudinary _cloudinary;
+        private readonly IHostingEnvironment _hostingEnvironment;
         #endregion
         #region constructer
-        public ProductController(IProductService productService, IConfiguration configuration, IOptions<CloudinaryImage> cloudinaryConfig)
+        public ProductController(IProductService productService, IConfiguration configuration, IOptions<CloudinaryImage> cloudinaryConfig, IHostingEnvironment hostingEnvironment)
         {
             _productService = productService;
             _configuration = configuration;
             _cloudinaryConfig = cloudinaryConfig;
+            _hostingEnvironment = hostingEnvironment;
             Account acc = new Account(
                 _cloudinaryConfig.Value.CloudName,
                 _cloudinaryConfig.Value.ApiKey,
@@ -113,6 +120,34 @@ namespace ShopOnlineApp.Areas.Admin.Controllers
 
             return new OkObjectResult(model);
         }
+        [HttpPost]
+        public async Task<IActionResult>  ExportExcel()
+        {
+            string sWebRootFolder = _hostingEnvironment.WebRootPath;
+            string directory = Path.Combine(sWebRootFolder, "export-files");
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+            string sFileName = $"Product_{DateTime.Now:yyyyMMddhhmmss}.xlsx";
+            string fileUrl = $"{Request.Scheme}://{Request.Host}/export-files/{sFileName}";
+            FileInfo file = new FileInfo(Path.Combine(directory, sFileName));
+            if (file.Exists)
+            {
+                file.Delete();
+                file = new FileInfo(Path.Combine(sWebRootFolder, sFileName));
+            }
+            var products =await _productService.GetAll();
+            using (ExcelPackage package = new ExcelPackage(file))
+            {
+                // add a new worksheet to the empty workbook
+                ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Products");
+                worksheet.Cells["A1"].LoadFromCollection(products, true, TableStyles.Light1);
+                worksheet.Cells.AutoFitColumns();
+                package.Save(); //Save the workbook.
+            }
+            return new OkObjectResult(fileUrl);
+        }
 
         [HttpPost]
         public IActionResult SaveEntity(ProductViewModel productVm)
@@ -136,6 +171,37 @@ namespace ShopOnlineApp.Areas.Admin.Controllers
                 _productService.Save();
                 return new OkObjectResult(productVm);
             }
+        }
+
+
+         [HttpPost]
+        public IActionResult ImportExcel(IList<IFormFile> files, int categoryId)
+        {
+            if (files != null && files.Count > 0)
+            {
+                var file = files[0];
+                var filename = ContentDispositionHeaderValue
+                                   .Parse(file.ContentDisposition)
+                                   .FileName
+                                   .Trim('"');
+
+                string folder = _hostingEnvironment.WebRootPath + $@"\uploaded\excels";
+                if (!Directory.Exists(folder))
+                {
+                    Directory.CreateDirectory(folder);
+                }
+                string filePath = Path.Combine(folder, filename);
+
+                using (FileStream fs = System.IO.File.Create(filePath))
+                {
+                    file.CopyTo(fs);
+                    fs.Flush();
+                }
+                _productService.ImportExcel(filePath, categoryId);
+                _productService.Save();
+                return new OkObjectResult(filePath);
+            }
+            return new NoContentResult();
         }
 
         [HttpPost]

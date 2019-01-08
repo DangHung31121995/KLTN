@@ -1,0 +1,74 @@
+﻿@model List<ShopOnlineApp.Application.ViewModels.BusinessAction.BusinessActionViewModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<h2>Danh sách nghiệp vụ</h2>
+
+
+<div class="">
+    <div class="page-title">
+        <div class="title_right">
+
+            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                <div class="input-group">
+                    <input type="text" id="txt-search-keyword" class="form-control" placeholder="Search...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" id="btn-search" type="button">Search!</button>
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Danh sách chức năng</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a href="/Admin/Business/UpdateBussiness">Cập nhật</a>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Tên chức năng</th>
+                            <th>Giới thiệu</th>
+                            <th width="20%">#</th>
+                        </tr>
+                    </thead>
+                    <tbody >
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @item.Name
+                            </td>
+                            <td>
+                                @item.Description
+                            </td>
+                            <td>
+                                <a href="/Admin/BusinessAction/Edit"  class="btn-edit"><i class="fa fa-pencil-square-o"></i></a>
+                                <a href="#" data-id="{{Id}}" class="btn-delete"><i class="fa fa-trash-o"></i></a>
+                            </td>
+                        </tr>
+                    }
+
+                   
+                    </tbody>
+                </table>
+             
+            </div>
+        </div>
+    </div>
+</div>

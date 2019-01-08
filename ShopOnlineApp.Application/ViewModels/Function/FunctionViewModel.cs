@@ -4,7 +4,7 @@ using ShopOnlineApp.Data.Enums;
 
 namespace ShopOnlineApp.Application.ViewModels.Function
 {
-    public class FunctionViewModel:ViewModelBase<Data.Entities.Function,FunctionViewModel>
+    public class FunctionViewModel:ViewModelBase<FunctionViewModel, Data.Entities.Function>
     {
         public string Id { get; set; }
         [Required]

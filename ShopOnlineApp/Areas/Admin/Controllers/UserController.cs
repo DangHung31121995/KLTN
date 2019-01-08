@@ -14,7 +14,6 @@ namespace ShopOnlineApp.Areas.Admin.Controllers
         private readonly IUserService _userService;
         private readonly IAuthorizationService _authorizationService;
 
-
         public UserController(IUserService userService, IAuthorizationService authorizationService)
         {
             _userService = userService;

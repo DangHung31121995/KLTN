@@ -67,11 +67,6 @@ namespace ShopOnlineApp.Application.Implementation
                                          || x.UserName.Contains(request.SearchText)
                                          || x.Email.Contains(request.SearchText));
             }
-                
-            //if (!string.IsNullOrEmpty(request?.CategoryId))
-            //{
-            //    query=query.ToList().Where(x=>x.cate)
-            //}
 
             int totalRow = await query.CountAsync();
 

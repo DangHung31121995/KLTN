@@ -5,8 +5,9 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
+using ShopOnlineApp.Data.EF;
+using ShopOnlineApp.Data.Enums;
 using System;
-using TeduCoreApp.Data.EF;
 
 namespace ShopOnlineApp.Data.EF.Migrations
 {
@@ -95,7 +96,7 @@ namespace ShopOnlineApp.Data.EF.Migrations
                     b.ToTable("AppUserTokens");
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.Advertistment", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.Advertistment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -130,7 +131,7 @@ namespace ShopOnlineApp.Data.EF.Migrations
                     b.ToTable("Advertistments");
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.AdvertistmentPage", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.AdvertistmentPage", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -142,7 +143,7 @@ namespace ShopOnlineApp.Data.EF.Migrations
                     b.ToTable("AdvertistmentPages");
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.AdvertistmentPosition", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.AdvertistmentPosition", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
@@ -161,7 +162,7 @@ namespace ShopOnlineApp.Data.EF.Migrations
                     b.ToTable("AdvertistmentPositions");
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.Announcement", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.Announcement", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -188,7 +189,7 @@ namespace ShopOnlineApp.Data.EF.Migrations
                     b.ToTable("Announcements");
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.AnnouncementUser", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.AnnouncementUser", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -208,7 +209,7 @@ namespace ShopOnlineApp.Data.EF.Migrations
                     b.ToTable("AnnouncementUsers");
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.AppRole", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.AppRole", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -227,7 +228,7 @@ namespace ShopOnlineApp.Data.EF.Migrations
                     b.ToTable("AppRoles");
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.AppUser", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.AppUser", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -279,7 +280,7 @@ namespace ShopOnlineApp.Data.EF.Migrations
                     b.ToTable("AppUsers");
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.Bill", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.Bill", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -319,7 +320,7 @@ namespace ShopOnlineApp.Data.EF.Migrations
                     b.ToTable("Bills");
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.BillDetail", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.BillDetail", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -349,7 +350,7 @@ namespace ShopOnlineApp.Data.EF.Migrations
                     b.ToTable("BillDetails");
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.Blog", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.Blog", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -397,7 +398,7 @@ namespace ShopOnlineApp.Data.EF.Migrations
                     b.ToTable("Blogs");
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.BlogTag", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.BlogTag", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -418,7 +419,37 @@ namespace ShopOnlineApp.Data.EF.Migrations
                     b.ToTable("BlogTags");
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.Color", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.Business", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Business");
+                });
+
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.BusinessAction", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("BusinessId");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BusinessId");
+
+                    b.ToTable("BusinessAction");
+                });
+
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.Color", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -434,7 +465,7 @@ namespace ShopOnlineApp.Data.EF.Migrations
                     b.ToTable("Colors");
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.Contact", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.Contact", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
@@ -469,7 +500,7 @@ namespace ShopOnlineApp.Data.EF.Migrations
                     b.ToTable("ContactDetails");
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.Feedback", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.Feedback", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -495,7 +526,7 @@ namespace ShopOnlineApp.Data.EF.Migrations
                     b.ToTable("Feedbacks");
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.Footer", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.Footer", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
@@ -510,7 +541,7 @@ namespace ShopOnlineApp.Data.EF.Migrations
                     b.ToTable("Footers");
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.Function", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.Function", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -537,7 +568,25 @@ namespace ShopOnlineApp.Data.EF.Migrations
                     b.ToTable("Functions");
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.Language", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.GrantPermission", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("BusinessActionId");
+
+                    b.Property<Guid>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BusinessActionId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("GrantPermission");
+                });
+
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.Language", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -557,7 +606,7 @@ namespace ShopOnlineApp.Data.EF.Migrations
                     b.ToTable("Languages");
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.Page", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.Page", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -580,7 +629,7 @@ namespace ShopOnlineApp.Data.EF.Migrations
                     b.ToTable("Pages");
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.Permission", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.Permission", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -608,7 +657,7 @@ namespace ShopOnlineApp.Data.EF.Migrations
                     b.ToTable("Permissions");
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.Product", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -642,7 +691,6 @@ namespace ShopOnlineApp.Data.EF.Migrations
                     b.Property<decimal?>("PromotionPrice");
 
                     b.Property<string>("SeoAlias")
-                        .HasColumnType("varchar(255)")
                         .HasMaxLength(255);
 
                     b.Property<string>("SeoDescription")
@@ -670,7 +718,7 @@ namespace ShopOnlineApp.Data.EF.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.ProductCategory", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.ProductCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -708,7 +756,7 @@ namespace ShopOnlineApp.Data.EF.Migrations
                     b.ToTable("ProductCategories");
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.ProductImage", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.ProductImage", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -728,7 +776,7 @@ namespace ShopOnlineApp.Data.EF.Migrations
                     b.ToTable("ProductImages");
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.ProductQuantity", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.ProductQuantity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -752,7 +800,7 @@ namespace ShopOnlineApp.Data.EF.Migrations
                     b.ToTable("ProductQuantities");
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.ProductTag", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.ProductTag", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -773,7 +821,7 @@ namespace ShopOnlineApp.Data.EF.Migrations
                     b.ToTable("ProductTags");
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.Size", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.Size", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -786,7 +834,7 @@ namespace ShopOnlineApp.Data.EF.Migrations
                     b.ToTable("Sizes");
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.Slide", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.Slide", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -820,7 +868,7 @@ namespace ShopOnlineApp.Data.EF.Migrations
                     b.ToTable("Slides");
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.SystemConfig", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.SystemConfig", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
@@ -847,7 +895,7 @@ namespace ShopOnlineApp.Data.EF.Migrations
                     b.ToTable("SystemConfigs");
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.Tag", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.Tag", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
@@ -867,7 +915,7 @@ namespace ShopOnlineApp.Data.EF.Migrations
                     b.ToTable("Tags");
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.WholePrice", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.WholePrice", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -887,143 +935,163 @@ namespace ShopOnlineApp.Data.EF.Migrations
                     b.ToTable("WholePrices");
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.Advertistment", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.Advertistment", b =>
                 {
-                    b.HasOne("TeduCoreApp.Data.Entities.AdvertistmentPosition", "AdvertistmentPosition")
+                    b.HasOne("ShopOnlineApp.Data.Entities.AdvertistmentPosition", "AdvertistmentPosition")
                         .WithMany("Advertistments")
                         .HasForeignKey("PositionId");
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.AdvertistmentPosition", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.AdvertistmentPosition", b =>
                 {
-                    b.HasOne("TeduCoreApp.Data.Entities.AdvertistmentPage", "AdvertistmentPage")
+                    b.HasOne("ShopOnlineApp.Data.Entities.AdvertistmentPage", "AdvertistmentPage")
                         .WithMany("AdvertistmentPositions")
                         .HasForeignKey("PageId");
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.Announcement", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.Announcement", b =>
                 {
-                    b.HasOne("TeduCoreApp.Data.Entities.AppUser", "AppUser")
+                    b.HasOne("ShopOnlineApp.Data.Entities.AppUser", "AppUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.AnnouncementUser", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.AnnouncementUser", b =>
                 {
-                    b.HasOne("TeduCoreApp.Data.Entities.Announcement", "Announcement")
+                    b.HasOne("ShopOnlineApp.Data.Entities.Announcement", "Announcement")
                         .WithMany("AnnouncementUsers")
                         .HasForeignKey("AnnouncementId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.Bill", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.Bill", b =>
                 {
-                    b.HasOne("TeduCoreApp.Data.Entities.AppUser", "User")
+                    b.HasOne("ShopOnlineApp.Data.Entities.AppUser", "User")
                         .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.BillDetail", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.BillDetail", b =>
                 {
-                    b.HasOne("TeduCoreApp.Data.Entities.Bill", "Bill")
+                    b.HasOne("ShopOnlineApp.Data.Entities.Bill", "Bill")
                         .WithMany("BillDetails")
                         .HasForeignKey("BillId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("TeduCoreApp.Data.Entities.Color", "Color")
+                    b.HasOne("ShopOnlineApp.Data.Entities.Color", "Color")
                         .WithMany()
                         .HasForeignKey("ColorId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("TeduCoreApp.Data.Entities.Product", "Product")
+                    b.HasOne("ShopOnlineApp.Data.Entities.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("TeduCoreApp.Data.Entities.Size", "Size")
+                    b.HasOne("ShopOnlineApp.Data.Entities.Size", "Size")
                         .WithMany()
                         .HasForeignKey("SizeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.BlogTag", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.BlogTag", b =>
                 {
-                    b.HasOne("TeduCoreApp.Data.Entities.Blog", "Blog")
+                    b.HasOne("ShopOnlineApp.Data.Entities.Blog", "Blog")
                         .WithMany("BlogTags")
                         .HasForeignKey("BlogId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("TeduCoreApp.Data.Entities.Tag", "Tag")
+                    b.HasOne("ShopOnlineApp.Data.Entities.Tag", "Tag")
                         .WithMany()
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.Permission", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.BusinessAction", b =>
                 {
-                    b.HasOne("TeduCoreApp.Data.Entities.Function", "Function")
+                    b.HasOne("ShopOnlineApp.Data.Entities.Business", "Business")
+                        .WithMany("BusinessActions")
+                        .HasForeignKey("BusinessId");
+                });
+
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.GrantPermission", b =>
+                {
+                    b.HasOne("ShopOnlineApp.Data.Entities.BusinessAction", "BusinessAction")
+                        .WithMany("GrantPermissions")
+                        .HasForeignKey("BusinessActionId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ShopOnlineApp.Data.Entities.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.Permission", b =>
+                {
+                    b.HasOne("ShopOnlineApp.Data.Entities.Function", "Function")
                         .WithMany()
                         .HasForeignKey("FunctionId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("TeduCoreApp.Data.Entities.AppRole", "AppRole")
+                    b.HasOne("ShopOnlineApp.Data.Entities.AppRole", "AppRole")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.Product", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.Product", b =>
                 {
-                    b.HasOne("TeduCoreApp.Data.Entities.ProductCategory", "ProductCategory")
+                    b.HasOne("ShopOnlineApp.Data.Entities.ProductCategory", "ProductCategory")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.ProductImage", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.ProductImage", b =>
                 {
-                    b.HasOne("TeduCoreApp.Data.Entities.Product", "Product")
+                    b.HasOne("ShopOnlineApp.Data.Entities.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.ProductQuantity", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.ProductQuantity", b =>
                 {
-                    b.HasOne("TeduCoreApp.Data.Entities.Color", "Color")
+                    b.HasOne("ShopOnlineApp.Data.Entities.Color", "Color")
                         .WithMany()
                         .HasForeignKey("ColorId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("TeduCoreApp.Data.Entities.Product", "Product")
+                    b.HasOne("ShopOnlineApp.Data.Entities.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("TeduCoreApp.Data.Entities.Size", "Size")
+                    b.HasOne("ShopOnlineApp.Data.Entities.Size", "Size")
                         .WithMany()
                         .HasForeignKey("SizeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.ProductTag", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.ProductTag", b =>
                 {
-                    b.HasOne("TeduCoreApp.Data.Entities.Product", "Product")
-                        .WithMany()
+                    b.HasOne("ShopOnlineApp.Data.Entities.Product", "Product")
+                        .WithMany("ProductTags")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("TeduCoreApp.Data.Entities.Tag", "Tag")
+                    b.HasOne("ShopOnlineApp.Data.Entities.Tag", "Tag")
                         .WithMany()
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("TeduCoreApp.Data.Entities.WholePrice", b =>
+            modelBuilder.Entity("ShopOnlineApp.Data.Entities.WholePrice", b =>
                 {
-                    b.HasOne("TeduCoreApp.Data.Entities.Product", "Product")
+                    b.HasOne("ShopOnlineApp.Data.Entities.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);

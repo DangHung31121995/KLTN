@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.EntityFrameworkCore;
 using ShopOnlineApp.Application.Interfaces;
 using ShopOnlineApp.Application.ViewModels.Product;
-using ShopOnlineApp.Data.Entities;
 using ShopOnlineApp.Data.Enums;
 using ShopOnlineApp.Data.IRepositories;
 using ShopOnlineApp.Infrastructure.Interfaces;
